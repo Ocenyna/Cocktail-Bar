@@ -1,0 +1,54 @@
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Cocktail {
+    private String nom;
+    private List<Boisson> composants;
+    private boolean sauvegarde;
+    public enum Accessoire { Verre, Paille, Glacon, Encas }
+
+    public Cocktail(String nom, boolean sauvegarde) {
+        this.setNom(nom);
+        this.setSauvegarde(sauvegarde);
+        this.composants = new ArrayList<>();
+    }
+
+    public void ajouterBoisson(Boisson b) {
+        this.composants.add(b);
+    }
+
+    public double calculerPrix() {
+        double total = 0;
+        for (Boisson b : composants) {
+            total += b.getPrix();
+        }
+        return total * 1.10;
+    }
+
+    public double calculerDegreAlcool() {
+        double volumeTotal = 0;
+        double alcoolPur = 0;
+        for (Boisson b : composants) {
+            volumeTotal += b.getContenance();
+            alcoolPur += (b.getDegreAlcool() * b.getContenance()) / 100;
+        }
+        return (volumeTotal == 0) ? 0 : (alcoolPur / volumeTotal) * 100;
+    }
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public boolean isSauvegarde() {
+		return sauvegarde;
+	}
+
+	public void setSauvegarde(boolean sauvegarde) {
+		this.sauvegarde = sauvegarde;
+	}
+}
