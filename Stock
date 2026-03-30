@@ -1,0 +1,26 @@
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Stock {
+    private Map<Boisson, Integer> boissons;
+
+    public Stock() {
+        this.boissons = new HashMap<>();
+    }
+
+    public void ajouterStock(Boisson b, int qte) {
+        boissons.put(b, boissons.getOrDefault(b, 0) + qte);
+    }
+
+    public boolean verifierDisponibilite(Boisson b) {
+        return boissons.getOrDefault(b, 0) > 0;
+    }
+
+    public void retirerStock(Boisson b, int qte) {
+        if (boissons.containsKey(b)) {
+            int current = boissons.get(b);
+            boissons.put(b, Math.max(0, current - qte));
+        }
+    }
+}
